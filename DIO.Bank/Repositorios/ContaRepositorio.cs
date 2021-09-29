@@ -1,5 +1,6 @@
 ﻿using DIO.Bank.Entidades;
 using DIO.Bank.Enums;
+using DIO.Bank.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,17 +31,43 @@ namespace DIO.Bank.Repositorios
 
         public static void InserirConta()
         {
+            int entradaTipoConta = 0;
+            string saldoDigitado = string.Empty;
+            double entradaSaldo = 0;
+            string creditoDigitado = string.Empty;
+            double entradaCredito = 0;
+            bool retorno = false;
+
             Console.WriteLine();
-            Console.WriteLine("Inserindo nova conta....");
-            Console.WriteLine("Digite 1 para Conta Física ou 2 para Conta Jurídica: ");
-            int entradaTipoConta = int.Parse(Console.ReadLine());
+            Console.WriteLine("INSERINDO NOVA CONTA....");
+
+            while (entradaTipoConta == 0)
+            {
+                Console.WriteLine("Digite 1 para Conta Física ou 2 para Conta Jurídica: ");
+                entradaTipoConta = Validador.ValidarTipoConta(Console.ReadLine());
+            }
+
             Console.WriteLine("Digite o nome do cliente: ");
             string entradaNome = Console.ReadLine();
-            Console.WriteLine("Digite o saldo inicial: ");
-            double entradaSaldo = double.Parse(Console.ReadLine());
-            Console.WriteLine("Digite o crédito inicial: ");
-            double entradaCredito = double.Parse(Console.ReadLine());
 
+            do
+            {
+                Console.WriteLine("Digite o saldo inicial: ");
+                saldoDigitado = Console.ReadLine();
+                retorno = Validador.ValidarSaldoInicial(saldoDigitado);
+            } while (!retorno);
+            entradaSaldo = double.Parse(saldoDigitado);
+            retorno = false;
+
+            do
+            {
+                Console.WriteLine("Digite o crédito inicial: ");
+                creditoDigitado = Console.ReadLine();
+                retorno = Validador.ValidarCreditoInicial(creditoDigitado);
+            } while (!retorno);
+            entradaCredito = double.Parse(creditoDigitado);
+            retorno = false;
+          
             Conta novaConta = new Conta(
                 entradaNome,
                 (TipoConta)entradaTipoConta,
@@ -49,6 +76,8 @@ namespace DIO.Bank.Repositorios
                 );
 
             listaContas.Add(novaConta);
+
+            Console.WriteLine(Environment.NewLine+"CONTA CADASTRADA COM SUCESSO."+Environment.NewLine);
         }
 
         public static void Sacar()

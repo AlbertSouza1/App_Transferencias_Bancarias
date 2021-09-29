@@ -5,3 +5,10 @@ C:\Users\RENAN\source\repos\DIO.Bank\DIO.Bank\obj\Debug\DIO.Bank.csprojAssemblyR
 C:\Users\RENAN\source\repos\DIO.Bank\DIO.Bank\obj\Debug\DIO.Bank.csproj.CoreCompileInputs.cache
 C:\Users\RENAN\source\repos\DIO.Bank\DIO.Bank\obj\Debug\DIO.Bank.exe
 C:\Users\RENAN\source\repos\DIO.Bank\DIO.Bank\obj\Debug\DIO.Bank.pdb
+C:\Users\RENAN\source\repos\DIO.Bank\App_Transferencias_Bancarias\DIO.Bank\bin\Debug\DIO.Bank.exe.config
+C:\Users\RENAN\source\repos\DIO.Bank\App_Transferencias_Bancarias\DIO.Bank\bin\Debug\DIO.Bank.exe
+C:\Users\RENAN\source\repos\DIO.Bank\App_Transferencias_Bancarias\DIO.Bank\bin\Debug\DIO.Bank.pdb
+C:\Users\RENAN\source\repos\DIO.Bank\App_Transferencias_Bancarias\DIO.Bank\obj\Debug\DIO.Bank.csprojAssemblyReference.cache
+C:\Users\RENAN\source\repos\DIO.Bank\App_Transferencias_Bancarias\DIO.Bank\obj\Debug\DIO.Bank.csproj.CoreCompileInputs.cache
+C:\Users\RENAN\source\repos\DIO.Bank\App_Transferencias_Bancarias\DIO.Bank\obj\Debug\DIO.Bank.exe
+C:\Users\RENAN\source\repos\DIO.Bank\App_Transferencias_Bancarias\DIO.Bank\obj\Debug\DIO.Bank.pdb
