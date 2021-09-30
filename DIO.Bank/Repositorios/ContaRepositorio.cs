@@ -1,6 +1,6 @@
 ﻿using DIO.Bank.Entidades;
 using DIO.Bank.Enums;
-using DIO.Bank.Helpers;
+using DIO.Bank.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,72 +12,34 @@ namespace DIO.Bank.Repositorios
     public static class ContaRepositorio
     {
         static List<Conta> listaContas = new List<Conta>();
-        public static void ListarContas()
+        public static List<Conta> ListarContas()
         {
+            
             if (listaContas.Count == 0)
             {
-                Console.WriteLine("Nenhuma conta cadastrada.");
-                return;
+                return null;
             }
             else
-            {
-                for(int i =0; i<listaContas.Count; i++)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine($"Número da conta: {i}{listaContas[i].ToString()}");
-                }
+            {              
+                return listaContas;
             }
         }
-
-        public static void InserirConta()
+        public static Conta RecuperarContaPorId(int idConta)
         {
-            int entradaTipoConta = 0;
-            string saldoDigitado = string.Empty;
-            double entradaSaldo = 0;
-            string creditoDigitado = string.Empty;
-            double entradaCredito = 0;
-            bool retorno = false;
-
-            Console.WriteLine();
-            Console.WriteLine("INSERINDO NOVA CONTA....");
-
-            while (entradaTipoConta == 0)
+            return listaContas[idConta];
+        }
+        public static bool InserirConta(Conta conta)
+        {
+            try
             {
-                Console.WriteLine("Digite 1 para Conta Física ou 2 para Conta Jurídica: ");
-                entradaTipoConta = Validador.ValidarTipoConta(Console.ReadLine());
+                listaContas.Add(conta);
+                return true;
             }
-
-            Console.WriteLine("Digite o nome do cliente: ");
-            string entradaNome = Console.ReadLine();
-
-            do
+            catch(Exception ex)
             {
-                Console.WriteLine("Digite o saldo inicial: ");
-                saldoDigitado = Console.ReadLine();
-                retorno = Validador.ValidarSaldoInicial(saldoDigitado);
-            } while (!retorno);
-            entradaSaldo = double.Parse(saldoDigitado);
-            retorno = false;
-
-            do
-            {
-                Console.WriteLine("Digite o crédito inicial: ");
-                creditoDigitado = Console.ReadLine();
-                retorno = Validador.ValidarCreditoInicial(creditoDigitado);
-            } while (!retorno);
-            entradaCredito = double.Parse(creditoDigitado);
-            retorno = false;
-          
-            Conta novaConta = new Conta(
-                entradaNome,
-                (TipoConta)entradaTipoConta,
-                entradaSaldo,
-                entradaCredito
-                );
-
-            listaContas.Add(novaConta);
-
-            Console.WriteLine(Environment.NewLine+"CONTA CADASTRADA COM SUCESSO."+Environment.NewLine);
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         public static void Sacar()
@@ -113,26 +75,16 @@ namespace DIO.Bank.Repositorios
             Console.WriteLine("Depósito realizado com sucesso.");
         }
 
-        public static void Transferir()
+        public static void Transferir(double valorTransferencia, int indiceRementente, int indiceDestino)
         {
-            Console.WriteLine("Digite o número da conta que irá transferir o dinheiro: ");
-            int indiceContaRemetente = int.Parse(Console.ReadLine());
-            if (indiceContaRemetente >= listaContas.Count)
+            try
             {
-                throw new ArgumentOutOfRangeException("Número da conta remetente inexistente.");
-            }
+                listaContas[indiceRementente].Transferir(valorTransferencia, listaContas[indiceDestino]);
 
-            Console.WriteLine("Digite o número da conta que irá receber o dinheiro: ");
-            int indiceContaDestino = int.Parse(Console.ReadLine());
-            if (indiceContaDestino >= listaContas.Count)
+            } catch(Exception ex)
             {
-                throw new ArgumentOutOfRangeException("Número da conta destino inexistente.");
+                Console.WriteLine(ex.Message);
             }
-
-            Console.WriteLine("Digite o valor a ser transferido: ");
-            double valorTransferencia = double.Parse(Console.ReadLine());
-
-            listaContas[indiceContaRemetente].Transferir(valorTransferencia, listaContas[indiceContaDestino]);
         }
     }
 }

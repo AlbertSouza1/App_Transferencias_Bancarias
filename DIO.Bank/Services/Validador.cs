@@ -1,10 +1,11 @@
-﻿using System;
+﻿using DIO.Bank.Repositorios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DIO.Bank.Helpers
+namespace DIO.Bank.Services
 {
     public static class Validador
     {
@@ -47,6 +48,28 @@ namespace DIO.Bank.Helpers
                 Console.WriteLine("Para inidicar o crédito é necessário digitar apenas números.");
                 return false;
             }
+        }
+
+        public static bool ValidarNumeroConta(string indiceDigitado)
+        {
+            if(int.TryParse(indiceDigitado, out int indice))
+            {
+                var listaContas = ContaRepositorio.ListarContas();
+
+                if (indice >= listaContas.Count)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+            
         }
     }
 }

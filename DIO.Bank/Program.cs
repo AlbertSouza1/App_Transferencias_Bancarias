@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DIO.Bank.Services;
 
 namespace DIO.Bank
 {
@@ -21,24 +22,23 @@ namespace DIO.Bank
                     switch (opcaoUsuario)
                     {
                         case "1":
-                           ContaRepositorio.ListarContas();
+                           ContaService.ListarContas();
                             break;
                         case "2":
-                            ContaRepositorio.InserirConta();
+                            ContaService.InserirConta();
                             break;
                         case "3":
                             ContaRepositorio.Transferir();
                             break;
                         case "4":
-                            ContaRepositorio.Sacar();
+                            ContaService.Sacar();
                             break;
                         case "5":
-                            ContaRepositorio.Depositar();
+                            ContaService.Depositar();
                             break;
                         case "C":
                             Console.Clear();
-                            break;
-                    
+                            break;                  
                     }
                 }catch(Exception e)
                 {
